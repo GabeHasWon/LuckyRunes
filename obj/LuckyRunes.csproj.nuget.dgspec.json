@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes_Local\\LuckyRunes.csproj": {}
+    "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes_Local\\LuckyRunes.csproj": {
+    "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes_Local\\LuckyRunes.csproj",
+        "projectUniqueName": "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj",
         "projectName": "blankexample",
-        "projectPath": "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes_Local\\LuckyRunes.csproj",
+        "projectPath": "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj",
         "packagesPath": "C:\\Users\\GABE\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes_Local\\obj\\",
+        "outputPath": "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

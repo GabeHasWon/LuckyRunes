@@ -17,10 +17,13 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
         {
             int heal = bits / 5;
             Player player = ChoosePlayer();
-            player.HealEffect(heal);
-            player.statLife += heal;
-            if (player.statLife > player.statLifeMax2)
-                player.statLife = player.statLifeMax2;
+            if (player != null)
+            {
+                player.HealEffect(heal);
+                player.statLife += heal;
+                if (player.statLife > player.statLifeMax2)
+                    player.statLife = player.statLifeMax2;
+            }
         }
     }
 }

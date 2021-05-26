@@ -36,20 +36,29 @@ namespace LuckyRunes
             events.Clear();
         }
 
+        /// <summary>
+        /// Gets all events given conditions.
+        /// </summary>
+        /// <param name="viewer">The person who sent the message.</param>
+        /// <param name="message">The message itself.</param>
+        /// <param name="bits">The bits in the message, if any.</param>
+        /// <returns></returns>
         public static IEnumerable<RuneEvent> GetMessageEvents(Viewer viewer, string message, int bits) => events.Where(x => x.CanHandleMessage(viewer, message, bits));
-        /// <summary>Gets a random event given </summary>
-        /// <param name="viewer"></param>
-        /// <param name="message"></param>
-        /// <param name="bits"></param>
+
+        /// <summary>Gets a random event given the conditions + an event's impact.</summary>
+        /// <param name="viewer">The person who sent the message.</param>
+        /// <param name="message">The message itself.</param>
+        /// <param name="bits">The bits in the message, if any.</param>
         /// <returns></returns>
         public static RuneEvent GetRandomMessageEvent(Viewer viewer, string message, int bits)
         {
-            var list = GetMessageEvents(viewer, message, bits);
-            float variance = Config.Variance;
+            var list = GetMessageEvents(viewer, message, bits); //Grab events that can handle the current message
+            float bitImpact = 5f; //replace with actual impact later
+            float variance = Config.Variance; //Variance local
 
-            //events.Where(x => x.Impact - Config.Variance );
+            list = list.Where(x => x.Impact - Config.Variance < bitImpact && x.Impact + Config.Variance > bitImpact); //Update list to include events with valid impact
 
-            return list.ElementAt(Main.rand.Next(list.Count()));
+            return list.ElementAt(Main.rand.Next(list.Count())); //Return a random event
         }
     }
 }

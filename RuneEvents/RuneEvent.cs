@@ -6,7 +6,7 @@ namespace LuckyRunes.RuneEvents
 {
     public abstract class RuneEvent
     {
-        /// <summary>Name of the event.</summary>
+        /// <summary>The name of the event.</summary>
         public virtual string Name => "Default";
 
         /// <summary>Message that is shown along with the event.</summary>
@@ -15,11 +15,11 @@ namespace LuckyRunes.RuneEvents
         /// <summary>Impact range of the event. Should be between 0 and 10.</summary>
         public virtual float Impact => 5f;
 
-        /// <summary>Checks if this event should handle a message. Use to check for mod status, bit amounts, etc.</summary>
+        /// <summary>Checks if this event should handle a message. Use to check for mod status, bit amounts, etc. Defaults to false.</summary>
         /// <param name="viewer"></param>
         /// <param name="message"></param>
         /// <param name="bits"></param>
-        public virtual bool CanHandleMessage(Viewer viewer, string message, int bits) => true;
+        public virtual bool CanHandleMessage(Viewer viewer, string message, int bits) => false;
 
         /// <summary>Called when any message that satisfies CanHAndleMessage is posted. Use for registering commands and responding to chat.</summary>
         /// <param name="viewer">Information on the person who sent the message.</param>
@@ -29,8 +29,8 @@ namespace LuckyRunes.RuneEvents
         {
         }
 
-        /// <summary>Checks if this event should handle a host. Use to check for host name or raid size.</summary>
-        public virtual bool CanHandleHost(string hoster, int viewers) => true;
+        /// <summary>Checks if this event should handle a host. Use to check for host name or raid size. Defaults to false.</summary>
+        public virtual bool CanHandleHost(string hoster, int viewers) => false;
 
         /// <summary>Called when anyone hosts the stream. Use to cause stuff to happen on host. Defaults to a simple thank-you message in game.</summary>
         /// <param name="hoster">Name of the hoster.</param>
