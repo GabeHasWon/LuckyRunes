@@ -1,4 +1,5 @@
-﻿using ProjectT;
+﻿using LuckyRunes.RuneEvents;
+using ProjectT;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -9,7 +10,12 @@ namespace LuckyRunes
     {
         public override void MessageHandler(Viewer viewer, string message, int bits)
         {
-            
+            if (bits > 0)
+            {
+                RuneEvent ev = RuneManager.GetRandomMessageEvent(viewer, message, bits);
+                if (ev != null)
+                    ev.HandleMessage(viewer, message, bits);
+            }
         }
 
         public override void onCommunitySubscription(Viewer viewer, string tier)

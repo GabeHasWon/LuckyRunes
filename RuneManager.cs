@@ -36,29 +36,65 @@ namespace LuckyRunes
             events.Clear();
         }
 
-        /// <summary>
-        /// Gets all events given conditions.
-        /// </summary>
+        /// <summary>Gets all events given conditions.</summary>
         /// <param name="viewer">The person who sent the message.</param>
         /// <param name="message">The message itself.</param>
         /// <param name="bits">The bits in the message, if any.</param>
-        /// <returns></returns>
         public static IEnumerable<RuneEvent> GetMessageEvents(Viewer viewer, string message, int bits) => events.Where(x => x.CanHandleMessage(viewer, message, bits));
 
-        /// <summary>Gets a random event given the conditions + an event's impact.</summary>
+        /// <summary>Gets a random event given the conditions + an event's impact. Returns null if there's no valid event.</summary>
         /// <param name="viewer">The person who sent the message.</param>
         /// <param name="message">The message itself.</param>
         /// <param name="bits">The bits in the message, if any.</param>
-        /// <returns></returns>
         public static RuneEvent GetRandomMessageEvent(Viewer viewer, string message, int bits)
         {
             var list = GetMessageEvents(viewer, message, bits); //Grab events that can handle the current message
-            float bitImpact = 5f; //replace with actual impact later
-            float variance = Config.Variance; //Variance local
+            float bitImpact = GetImpact(bits); //replace with actual impact later
 
-            list = list.Where(x => x.Impact - Config.Variance < bitImpact && x.Impact + Config.Variance > bitImpact); //Update list to include events with valid impact
+            list = RestrictToImpact(list, bitImpact); //Update list to include events with valid impact
 
-            return list.ElementAt(Main.rand.Next(list.Count())); //Return a random event
+            if (list.Count() > 0)
+            {
+                int loops = -1;
+                while (true) //guarantee a valid event is returned
+                {
+                    loops++;
+
+                    if (loops > 300) return null; //We could not find a valid event somehow - failsafe that only matters for edge cases
+
+                    var ev = list.ElementAt(Main.rand.Next(list.Count())); //Grab a random event
+                    if (ev is PlayerEvent) //If player event
+                    {
+                        var pEvent = ev as PlayerEvent;
+                        if (!pEvent.ChooseAllPlayers && pEvent.ChoosePlayer() != null) //If the player-specific event has a valid player
+                            return ev;
+                        return ev;
+                    }
+                    else if (ev is WorldEvent) //If world event
+                    {
+                        var wEvent = ev as WorldEvent;
+                        if (wEvent.RequiredWorldConditions)
+                            return ev;
+                    }
+                }
+            }
+            return null;
         }
+
+        /// <summary>Translates bit count into impact.</summary>
+        /// <param name="bits">Bit count to check against.</param>
+        public static float GetImpact(int bits)
+        {
+            if (bits >= Config.VeryHighBit) return 9f;
+            else if (bits >= Config.HighBit) return 7f;
+            else if (bits >= Config.MediumBit) return 5f;
+            else if (bits >= Config.LowBit) return 3f;
+            return 1f;
+        }
+
+        private static IEnumerable<RuneEvent> RestrictToImpact(IEnumerable<RuneEvent> list, float impact)
+        {
+            return list.Where(x => x.Impact - Config.Variance < impact && x.Impact + Config.Variance > impact);
+        } 
     }
 }

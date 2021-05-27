@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace LuckyRunes
 {
-	public class blankexample : Mod
+	public class LuckyRunes : Mod
 	{
 		TwitchInput input = new TwitchInput();
 		public static Mod ProjectT;
