@@ -10,8 +10,7 @@ namespace LuckyRunes
 {
     public static class Calls
     {
-		static public Mod ProjectT => blankexample.ProjectT;
-
+		static public Mod ProjectT => LuckyRunes.ProjectT;
 
 		//how to send a message in Chat:
 		static public void Sendmessage(string message)
@@ -37,7 +36,6 @@ namespace LuckyRunes
 		}
 
 		//The "Viewers" I require for adding and removing coins don't have to be 100% accurate. Only the Username and UserID are required. the rest can just be null.
-
 		static public bool Removecoins(Viewer viewer, double CoinsToRemove)
 		{
 			if (ProjectT != null)

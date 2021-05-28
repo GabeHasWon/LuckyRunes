@@ -8,13 +8,18 @@ namespace LuckyRunes
 {
     public class TwitchInput : TwitchHandler
     {
+        /// <summary>Automatically runs RuneManager's GetRandomMessageEvent if the message has >0 bits.</summary>
+        /// <param name="viewer"></param>
+        /// <param name="message"></param>
+        /// <param name="bits"></param>
         public override void MessageHandler(Viewer viewer, string message, int bits)
         {
-            if (bits > 0)
+            bool modMessage = viewer.mod && message.StartsWith("!runeevent");
+            if (bits > 0 || modMessage)
             {
-                RuneEvent ev = RuneManager.GetRandomMessageEvent(viewer, message, bits);
+                RuneEvent ev = RuneManager.GetEvent(RuneManager.GetBitImpact(bits));
                 if (ev != null)
-                    ev.HandleMessage(viewer, message, bits);
+                    ev.Effects();
             }
         }
 

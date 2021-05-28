@@ -1,4 +1,4 @@
 displayName = Lucky Runes
 author = Laugic & GabeHasWon
 version = 0.1
-modReferences = ProjectT
+dllReferences = ProjectT_v0.4

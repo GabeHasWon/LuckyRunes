@@ -36,30 +36,24 @@ namespace LuckyRunes
             events.Clear();
         }
 
-        /// <summary>Gets all events given conditions.</summary>
-        /// <param name="viewer">The person who sent the message.</param>
-        /// <param name="message">The message itself.</param>
-        /// <param name="bits">The bits in the message, if any.</param>
-        public static IEnumerable<RuneEvent> GetMessageEvents(Viewer viewer, string message, int bits) => events.Where(x => x.CanHandleMessage(viewer, message, bits));
-
         /// <summary>Gets a random event given the conditions + an event's impact. Returns null if there's no valid event.</summary>
         /// <param name="viewer">The person who sent the message.</param>
         /// <param name="message">The message itself.</param>
         /// <param name="bits">The bits in the message, if any.</param>
-        public static RuneEvent GetRandomMessageEvent(Viewer viewer, string message, int bits)
+        public static RuneEvent GetEvent(float impact)
         {
-            var list = GetMessageEvents(viewer, message, bits); //Grab events that can handle the current message
-            float bitImpact = GetImpact(bits); //replace with actual impact later
+            var list = RestrictToImpact(events, impact); //Update list to include events with valid impact
+            return GetValidEvent(list); //Grab and return a single valid event
+        }
 
-            list = RestrictToImpact(list, bitImpact); //Update list to include events with valid impact
-
+        private static RuneEvent GetValidEvent(IEnumerable<RuneEvent> list)
+        {
             if (list.Count() > 0)
             {
                 int loops = -1;
                 while (true) //guarantee a valid event is returned
                 {
                     loops++;
-
                     if (loops > 300) return null; //We could not find a valid event somehow - failsafe that only matters for edge cases
 
                     var ev = list.ElementAt(Main.rand.Next(list.Count())); //Grab a random event
@@ -83,7 +77,7 @@ namespace LuckyRunes
 
         /// <summary>Translates bit count into impact.</summary>
         /// <param name="bits">Bit count to check against.</param>
-        public static float GetImpact(int bits)
+        public static float GetBitImpact(int bits)
         {
             if (bits >= Config.VeryHighBit) return 9f;
             else if (bits >= Config.HighBit) return 7f;
@@ -92,9 +86,9 @@ namespace LuckyRunes
             return 1f;
         }
 
-        private static IEnumerable<RuneEvent> RestrictToImpact(IEnumerable<RuneEvent> list, float impact)
-        {
-            return list.Where(x => x.Impact - Config.Variance < impact && x.Impact + Config.Variance > impact);
-        } 
+        /// <summary>Returns the list given the impact and variance restrictions.</summary>
+        /// <param name="list">List to restrict.</param>
+        /// <param name="impact">Base impact to restrict from.</param>
+        private static IEnumerable<RuneEvent> RestrictToImpact(IEnumerable<RuneEvent> list, float impact) => list.Where(x => x.Impact - Config.Variance < impact && x.Impact + Config.Variance > impact);
     }
 }
