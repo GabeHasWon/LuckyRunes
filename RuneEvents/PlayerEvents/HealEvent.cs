@@ -13,9 +13,10 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
 
         public override void Effects()
         {
-            Player player = ChoosePlayer();
+            Player player = GetPlayer();
             if (player != null)
             {
+                base.Effects();
                 player.HealEffect(20);
                 player.statLife += 20;
                 if (player.statLife > player.statLifeMax2)

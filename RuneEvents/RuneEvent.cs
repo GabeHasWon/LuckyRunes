@@ -15,15 +15,17 @@ namespace LuckyRunes.RuneEvents
         /// <summary>Impact range of the event. Should be between 0 and 10. Defaults to 5f.</summary>
         public virtual float Impact => 5f;
 
-        /// <summary>Signifies that the event is destructive is some way. If true, this event will not run if config. Defaults to false.</summary>
+        /// <summary>Signifies that the event is destructive is some way. If true, this event will not run if config has destructive events set to false. Defaults to false.</summary>
         public virtual bool Destructive => false;
 
         /// <summary>Check conditions. Defaults to true.</summary>
         public virtual bool Condition => true;
 
-        /// <summary>The actual effects of this event. Does nothing by default.</summary>
+        /// <summary>The actual effects of this event. Prints a message to chat by default.</summary>
         public virtual void Effects()
         {
+            Main.NewText(Name, Color.Pink);
+            Main.NewText(Message, Color.Pink);
         }
     }
 }
