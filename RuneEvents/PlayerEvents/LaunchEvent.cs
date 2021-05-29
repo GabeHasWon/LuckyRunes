@@ -8,12 +8,9 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
         public override string Message => "weeeee";
         public override float Impact => 1f;
 
-        public override void Effects()
+        public override void PlayerEffect(Player player)
         {
-            base.Effects();
-            Player p = GetPlayer();
-            if (p != null)
-                p.velocity.Y = -50;
+            player.velocity.Y = -50;
         }
     }
 }

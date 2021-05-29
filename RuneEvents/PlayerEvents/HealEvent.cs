@@ -11,17 +11,12 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
         public override string Message => "You get healed!";
         public override float Impact => 1f;
 
-        public override void Effects()
-        {
-            Player player = GetPlayer();
-            if (player != null)
-            {
-                base.Effects();
-                player.HealEffect(20);
-                player.statLife += 20;
-                if (player.statLife > player.statLifeMax2)
-                    player.statLife = player.statLifeMax2;
-            }
+        public override void PlayerEffect(Player player)
+        { 
+            player.HealEffect(20);
+            player.statLife += 20;
+            if (player.statLife > player.statLifeMax2)
+                player.statLife = player.statLifeMax2;
         }
     }
 }

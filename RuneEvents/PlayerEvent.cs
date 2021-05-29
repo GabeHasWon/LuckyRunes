@@ -17,5 +17,17 @@ namespace LuckyRunes.RuneEvents
                 return Main.rand.Next(Main.player.Where(x => x.active && !x.dead) as IList<Player>); //Grab a random player
             return Main.LocalPlayer; //Grab the local player
         }
+
+        public sealed override void Effects()
+        {
+            Player p = GetPlayer();
+            if (p != null)
+            {
+                base.Effects();
+                PlayerEffect(p);
+            }
+        }
+
+        public abstract void PlayerEffect(Player player);
     }
 }

@@ -10,15 +10,10 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
         public override string Message => "Shoots a firework.";
         public override float Impact => 1f;
 
-        public override void Effects()
+        public override void PlayerEffect(Player player)
         {
-            Player player = GetPlayer();
-            if (player != null)
-            {
-                base.Effects();
-                int[] fireworks = new int[] { ProjectileID.RocketFireworkBlue, ProjectileID.RocketFireworkGreen, ProjectileID.RocketFireworkRed, ProjectileID.RocketFireworkYellow };
+            int[] fireworks = new int[] { ProjectileID.RocketFireworkBlue, ProjectileID.RocketFireworkGreen, ProjectileID.RocketFireworkRed, ProjectileID.RocketFireworkYellow };
                 Projectile.NewProjectile(player.Center, new Vector2(0, -9 - Main.rand.NextFloat(0, 5.5f)).RotatedByRandom(0.16f), Main.rand.Next(fireworks), 4, 1f);
-            }
         }
     }
 }

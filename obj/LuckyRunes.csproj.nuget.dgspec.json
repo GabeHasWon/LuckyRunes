@@ -1,26 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj": {}
+    "C:\\Users\\Laugic\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj": {
+    "C:\\Users\\Laugic\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj",
+        "projectUniqueName": "C:\\Users\\Laugic\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj",
         "projectName": "LuckyRunes",
-        "projectPath": "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj",
-        "packagesPath": "C:\\Users\\GABE\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\GABE\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\obj\\",
+        "projectPath": "C:\\Users\\Laugic\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\LuckyRunes.csproj",
+        "packagesPath": "C:\\Users\\Laugic\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Laugic\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\LuckyRunes\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\GABE\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Laugic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net472"
@@ -31,6 +26,7 @@
         },
         "frameworks": {
           "net472": {
+            "targetAlias": "net472",
             "projectReferences": {}
           }
         },
@@ -42,12 +38,14 @@
       },
       "frameworks": {
         "net472": {
+          "targetAlias": "net472",
           "dependencies": {
             "tModLoader.CodeAssist": {
               "target": "Package",
               "version": "[0.1.*, )"
             }
-          }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
