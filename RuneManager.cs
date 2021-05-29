@@ -40,9 +40,9 @@ namespace LuckyRunes
         /// <param name="viewer">The person who sent the message.</param>
         /// <param name="message">The message itself.</param>
         /// <param name="bits">The bits in the message, if any.</param>
-        public static RuneEvent GetEvent(float impact)
+        public static RuneEvent GetEvent(float impact, List<RuneEvent> restrictedEvents = null)
         {
-            var list = RestrictToImpact(events, impact); //Update list to include events with valid impact
+            var list = RestrictToImpact(restrictedEvents ?? events, impact); //Update list to include events with valid impact
             return GetValidEvent(list); //Grab and return a single valid event
         }
 

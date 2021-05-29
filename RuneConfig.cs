@@ -77,5 +77,15 @@ namespace LuckyRunes
         [Tooltip("If true, disables all events that destroy, replace or add tiles to the world.")]
         [DefaultValue(false)]
         public bool NoDestructive { get; set; }
+
+        [Label("Sub Impact Level")]
+        [Tooltip("Controls the impact that a sub of any kind has. Defaults to 5.")]
+        [DefaultValue(5f)]
+        public float SubImpact { get; set; }
+
+        [Label("Sub Specific Event")]
+        [Tooltip("Runs a specific event every time someone subs to the channel. If None, will not run a specific event on sub. Defaults to None.")]
+        [DefaultValue("None")]
+        public string SubSpecificName { get; set; }
     }
 }
