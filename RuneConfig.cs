@@ -87,5 +87,10 @@ namespace LuckyRunes
         [Tooltip("Runs a specific event every time someone subs to the channel. If None, will not run a specific event on sub. Defaults to None.")]
         [DefaultValue("None")]
         public string SubSpecificName { get; set; }
+
+        public override void OnChanged()
+        {
+            RuneManager.NoDestructive = NoDestructive;
+        }
     }
 }
