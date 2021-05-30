@@ -1,6 +1,7 @@
 ﻿using LuckyRunes.RuneEvents;
 using ProjectT;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -17,6 +18,8 @@ namespace LuckyRunes
         public static void AddEvent(RuneEvent ev) => events.Add(ev);
         public static void RemoveEvent(RuneEvent ev) => events.Remove(ev);
         public static void Clear() => events.Clear();
+
+        public static bool NoDestructive { get; set; }
 
         public static void Load()
         {
@@ -43,7 +46,18 @@ namespace LuckyRunes
         public static RuneEvent GetEvent(float impact, List<RuneEvent> restrictedEvents = null)
         {
             var list = RestrictToImpact(restrictedEvents ?? events, impact); //Update list to include events with valid impact
-            return GetValidEvent(list); //Grab and return a single valid event
+            return ReturnValidEvents(list).GetRandom(); //Update list to remove events that don't meet the conditions, then pick a random one
+        }
+
+        private static IEnumerable<RuneEvent> ReturnValidEvents(IEnumerable<RuneEvent> list)
+        {
+            var newList = new List<RuneEvent>();
+            foreach (RuneEvent ev in list)
+            {
+                if (ev.Condition && !(ev.Destructive && NoDestructive))
+                    newList.Add(ev);
+            }
+            return newList;
         }
 
         private static RuneEvent GetValidEvent(IEnumerable<RuneEvent> list)
@@ -89,6 +103,6 @@ namespace LuckyRunes
         /// <summary>Returns the list given the impact and variance restrictions.</summary>
         /// <param name="list">List to restrict.</param>
         /// <param name="impact">Base impact to restrict from.</param>
-        private static IEnumerable<RuneEvent> RestrictToImpact(IEnumerable<RuneEvent> list, float impact) => list.Where(x => x.Impact - Config.Variance < impact && x.Impact + Config.Variance > impact);
+        private static IEnumerable<RuneEvent> RestrictToImpact(IEnumerable<RuneEvent> list, float impact) => list.Where(x => x.Impact - Config.Variance <= impact && x.Impact + Config.Variance >= impact);
     }
 }

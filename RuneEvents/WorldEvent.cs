@@ -10,5 +10,13 @@ namespace LuckyRunes.RuneEvents
     {
         /// <summary>Used to check conditions, such as Main.hardMode.</summary>
         public virtual bool RequiredWorldConditions => true;
+
+        public sealed override void Effects()
+        {
+            base.Effects();
+            WorldEffect();
+        }
+
+        public abstract void WorldEffect();
     }
 }
