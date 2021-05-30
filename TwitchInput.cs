@@ -67,7 +67,6 @@ namespace LuckyRunes
         {
             if (Config.SubSpecificName != "None")
             {
-
             }
         }
     }
