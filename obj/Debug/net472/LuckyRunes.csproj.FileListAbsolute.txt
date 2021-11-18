@@ -52,7 +52,6 @@ C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin
 C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin\Debug\net472\MP3Sharp.dll
 C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin\Debug\net472\Newtonsoft.Json.dll
 C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin\Debug\net472\NVorbis.dll
-C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin\Debug\net472\ProjectT_v0.4.dll
 C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin\Debug\net472\ReLogic.dll
 C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin\Debug\net472\Steamworks.NET.dll
 C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin\Debug\net472\TerrariaHooks.dll
@@ -62,3 +61,4 @@ C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin
 C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin\Debug\net472\MonoMod.RuntimeDetour.xml
 C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin\Debug\net472\MonoMod.Utils.xml
 C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\obj\Debug\net472\LuckyRunes.csproj.CopyComplete
+C:\Users\Laugic\Documents\My Games\Terraria\ModLoader\Mod Sources\LuckyRunes\bin\Debug\net472\ProjectT_v0.5.5.dll

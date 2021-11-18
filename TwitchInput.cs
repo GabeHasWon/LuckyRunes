@@ -3,6 +3,7 @@ using ProjectT;
 using System;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace LuckyRunes
 {
@@ -17,13 +18,10 @@ namespace LuckyRunes
         /// <param name="bits"></param>
         public override void MessageHandler(Viewer viewer, string message, int bits)
         {
+            Main.rand = new UnifiedRandom((int)DateTime.Now.Ticks);
             Main.NewText("Message Checked");
 
-            RuneEvent ev = RuneManager.GetEvent(3f);
-            if (ev != null)
-                ev.Effects();
-
-            /*
+            
             float impact = 0f;
             if (bits > 0)
                 impact = RuneManager.GetBitImpact(bits);
@@ -32,14 +30,14 @@ namespace LuckyRunes
             else if(message.StartsWith(Config.RuneCommandPrefix) && GetCoinsFromMessage(message) > 0 && viewer.Coins >= GetCoinsFromMessage(message))
             {
                 viewer.Coins -= GetCoinsFromMessage(message);
-                impact = 3f;//RuneManager.GetBitImpact((int)(GetCoinsFromMessage(message) * Config.CoinRatio));
+                impact = RuneManager.GetBitImpact((int)(GetCoinsFromMessage(message) * Config.CoinRatio));
             }
             if (impact > 0)
             {
                 RuneEvent ev = RuneManager.GetEvent(impact);
                 if (ev != null)
                     ev.Effects();
-            }*/
+            }
         }
 
         private double GetCoinsFromMessage(string message)
