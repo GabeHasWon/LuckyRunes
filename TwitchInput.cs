@@ -1,5 +1,4 @@
-﻿using LuckyRunes.RuneEvents;
-using ProjectT;
+﻿using ProjectT;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -18,11 +17,11 @@ namespace LuckyRunes
         /// <param name="bits"></param>
         public override void MessageHandler(Viewer viewer, string message, int bits)
         {
-            Main.rand = new UnifiedRandom((int)DateTime.Now.Ticks);
-            Main.NewText("Message Checked");
+            if (Main.rand == null)
+                Main.rand = new UnifiedRandom((int)DateTime.Now.Ticks);
 
-            
             float impact = 0f;
+
             if (bits > 0)
                 impact = RuneManager.GetBitImpact(bits);
             else if(viewer.mod && message.StartsWith(Config.RuneCommandPrefix))
@@ -32,28 +31,36 @@ namespace LuckyRunes
                 viewer.Coins -= GetCoinsFromMessage(message);
                 impact = RuneManager.GetBitImpact((int)(GetCoinsFromMessage(message) * Config.CoinRatio));
             }
+
             if (impact > 0)
             {
-                RuneEvent ev = RuneManager.GetEvent(impact);
-                if (ev != null)
-                    ev.Effects();
+                RuneManager.GetEvent(impact)?.Effects();
             }
         }
 
         private double GetCoinsFromMessage(string message)
         {
-            string[] messageParms = message.Split(' ');
+            string[] messageParams = message.Split(' ');
 
-            if (messageParms.Length > 1 && double.TryParse(messageParms[1], out double impact))
+            if (messageParams.Length > 1 && double.TryParse(messageParams[1], out double impact))
                 return impact;
+            return 0;
+        }
+
+        private double GetSecondArgument(string message)
+        {
+            string[] messageParams = message.Split(' ');
+
+            if (messageParams.Length > 2)
+                return messageParams[2];
             return 0;
         }
 
         private float GetImpactFromModMessage(string message)
         {
-            string[] messageParms = message.Split(' ');
+            string[] messageParams = message.Split(' ');
 
-            if (messageParms.Length > 1 && float.TryParse(messageParms[1], out float impact))
+            if (messageParams.Length > 1 && float.TryParse(messageParams[1], out float impact))
                 return impact;
             return 0f;
         }
@@ -88,20 +95,15 @@ namespace LuckyRunes
 
         public override void onIncorrectLogin() => Main.NewText("Bot failed to connect. (Login Info)");
 
-        public override void onNewSubscriber(Viewer viewer, string tier)
-        {
-            SubEvent();
-            //tiers are either: Prime, Tier1, Tier2, Tier3 or NotSet
-        }
+        //tiers are either: Prime, Tier1, Tier2, Tier3 or NotSet
+        public override void onNewSubscriber(Viewer viewer, string tier) => SubEvent();
 
         public override void onReSubscriber(Viewer viewer, string tier) => SubEvent();
 
         private void SubEvent()
         {
             if (Config.SubSpecificName != "None")
-            {
                 RuneManager.GetEvent(Config.SubImpact);
-            }
         }
     }
 }

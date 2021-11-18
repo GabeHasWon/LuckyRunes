@@ -28,9 +28,7 @@ namespace LuckyRunes
             foreach (var type in types)
             {
                 if (type.IsSubclassOf(typeof(RuneEvent)) && !type.IsAbstract)
-                {
                     events.Add(Activator.CreateInstance(type) as RuneEvent);
-                }
             }
         }
 
@@ -71,7 +69,8 @@ namespace LuckyRunes
                 while (true) //guarantee a valid event is returned
                 {
                     loops++;
-                    if (loops > 300) return null; //We could not find a valid event somehow - failsafe that only matters for edge cases
+                    if (loops > 300)
+                        return null; //We could not find a valid event somehow - failsafe that only matters for edge cases
 
                     var ev = list.ElementAt(Main.rand.Next(list.Count())); //Grab a random event
                     if (ev is PlayerEvent) //If player event

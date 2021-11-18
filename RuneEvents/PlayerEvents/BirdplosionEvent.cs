@@ -1,7 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 using Terraria.Utilities;
 
 namespace LuckyRunes.RuneEvents.PlayerEvents
@@ -17,7 +15,7 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
             for (int i = 0; i < 20; i++)
             {
                 int bird = GetBird();
-                if(Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                     NPC.NewNPC((int)player.Center.X - 20 + Main.rand.Next(40), (int)player.Center.Y - 30 + Main.rand.Next(60), bird);
             }
         }
@@ -25,11 +23,11 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
         private int GetBird()
         {
             WeightedRandom<int> wRand = new WeightedRandom<int>(Main.rand);
-                wRand.Add(NPCID.Bird, 33);
-                wRand.Add(NPCID.BirdBlue, 33);
-                wRand.Add(NPCID.BirdRed, 33);
-                wRand.Add(NPCID.GoldBird, 1);
-            return wRand.Get();
+            wRand.Add(NPCID.Bird, 33);
+            wRand.Add(NPCID.BirdBlue, 33);
+            wRand.Add(NPCID.BirdRed, 33);
+            wRand.Add(NPCID.GoldBird, 1);
+            return wRand;
         }
     }
 }

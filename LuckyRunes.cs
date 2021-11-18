@@ -1,6 +1,3 @@
-using LuckyRunes.RuneEvents;
-using System;
-using System.Reflection;
 using Terraria.ModLoader;
 
 namespace LuckyRunes
@@ -13,10 +10,10 @@ namespace LuckyRunes
         public override void Load()
         {
             ProjectT = ModLoader.GetMod("ProjectT");
-            if(ProjectT != null)
-            {
+
+            if (ProjectT != null)
                 input = new TwitchInput();
-            }
+
             RuneManager.Load();
         }
 
