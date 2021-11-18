@@ -14,6 +14,11 @@ namespace LuckyRunes
         [DefaultValue("!runeroll")]
         public string RuneCommandPrefix { get; set; }
 
+        [Label("Specific Event Prefix")]
+        [Tooltip("The prefix for viewers to type before rolling a specific rune event. The amount of coins spent depends on the event chosen.")]
+        [DefaultValue("!runeevent")]
+        public string SpecificEventPrefix { get; set; }
+
         [Label("Coin to Bit Ratio")]
         [Tooltip("The amount of Coins equal to a bit. The thresholds used will be the same as the bit settings.")]
         [Range(0.01f, 10)]

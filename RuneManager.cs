@@ -50,6 +50,14 @@ namespace LuckyRunes
             return newList[rand.Next(newList.Count())]; //Update list to remove events that don't meet the conditions, then pick a random one
         }
 
+        /// <summary>Gets the first event that has the given name.</summary>
+        /// <param name="name">Name to look for.</param>
+        public static RuneEvent GetEvent(string name)
+        {
+            RuneEvent ev = events.FirstOrDefault(x => x.Name.ToUpper() == name.ToUpper());
+            return ev; //Select the first event that matches the name
+        }
+
         private static IEnumerable<RuneEvent> ReturnValidEvents(IEnumerable<RuneEvent> list)
         {
             var newList = new List<RuneEvent>();
@@ -76,7 +84,7 @@ namespace LuckyRunes
                     if (ev is PlayerEvent) //If player event
                     {
                         var pEvent = ev as PlayerEvent;
-                        if (!pEvent.SelectRandomPlayer && pEvent.GetPlayer() != null) //If the player-specific event has a valid player
+                        if (pEvent.GetPlayer() != null) //If the player-specific event has a valid player
                             return ev;
                         return ev;
                     }
@@ -100,6 +108,17 @@ namespace LuckyRunes
             else if (bits >= Config.MediumBit) return 5f;
             else if (bits >= Config.LowBit) return 3f;
             return 1f;
+        }
+
+        /// <summary>Translates impact into bit count.</summary>
+        /// <param name="impact">Impact to check against.</param>
+        public static float GetBitsFromImpact(float impact)
+        {
+            if (impact >= 9f) return Config.VeryHighBit;
+            else if (impact >= 7f) return Config.HighBit;
+            else if (impact >= 5f) return Config.MediumBit;
+            else if (impact >= 3f) return Config.LowBit;
+            return Config.VeryLowBit;
         }
 
         /// <summary>Returns the list given the impact and variance restrictions.</summary>

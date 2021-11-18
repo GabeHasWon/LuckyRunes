@@ -19,8 +19,11 @@ namespace LuckyRunes
         /// <param name="bits"></param>
         public override void MessageHandler(Viewer viewer, string message, int bits)
         {
-            if (Main.rand == null)
+            if (Main.rand == null) //WHY is it null
                 Main.rand = new UnifiedRandom((int)DateTime.Now.Ticks);
+
+            if (message.StartsWith(Config.SpecificEventPrefix) && SpecificRuneEvent(viewer, message))
+                return;
 
             float impact = 0f;
 
@@ -38,9 +41,39 @@ namespace LuckyRunes
             {
                 RuneEvent ev = RuneManager.GetEvent(impact);
                 Main.NewText($"{viewer.Name} bought: [c/{GetImpactColor(ev.Impact).Hex3()}:{ev.Name}]");
-                Main.NewText($"They say: {GetMessage(message)}");
+                string note = GetSecondParameter(message);
+                if (note != string.Empty)
+                    Main.NewText($"They say: {note}");
                 ev?.Effects();
             }
+        }
+
+        private bool SpecificRuneEvent(Viewer viewer, string message)
+        {
+            string[] messageParams = message.Split(' ');
+
+            if (messageParams.Length > 0)
+            {
+                string name = messageParams[1];
+                if (name != string.Empty)
+                {
+                    RuneEvent ev = RuneManager.GetEvent(name);
+
+                    double coins = RuneManager.GetBitsFromImpact(ev.Impact) * Config.CoinRatio;
+                    if (viewer.Coins >= coins)
+                        viewer.Coins -= coins;
+                    else
+                        return false;
+
+                    Main.NewText($"{viewer.Name} bought: [c/{GetImpactColor(ev.Impact).Hex3()}:{ev.Name}]");
+                    string note = GetSecondParameter(message);
+
+                    if (note != string.Empty)
+                        Main.NewText($"They say: {note}");
+                    return true;
+                }
+            }
+            return false;
         }
 
         private Color GetImpactColor(float impact)
@@ -60,18 +93,18 @@ namespace LuckyRunes
         {
             string[] messageParams = message.Split(' ');
 
-            if (messageParams.Length > 1 && double.TryParse(messageParams[1], out double impact))
-                return impact;
+            if (messageParams.Length > 1 && double.TryParse(messageParams[1], out double coins))
+                return coins;
             return 0;
         }
 
-        private string GetMessage(string message)
+        private string GetSecondParameter(string message)
         {
             string[] messageParams = message.Split(' ');
 
             if (messageParams.Length > 2)
                 return messageParams[2];
-            return "";
+            return string.Empty;
         }
 
         private float GetImpactFromModMessage(string message)

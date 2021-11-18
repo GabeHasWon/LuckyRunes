@@ -70,7 +70,7 @@ namespace LuckyRunes
 				string req = Convert.ToString(CoinsToAdd);
 
                 //Requires the operator "AddCoins", a receiver and amount. I check on my side if the user exists. you don't have to. But you won't get a return here.
-                ProjectT.Call("AddCoins", viewer, req)
+                ProjectT.Call("AddCoins", viewer, req);
 			}
 		}
 	}
