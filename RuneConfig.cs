@@ -8,6 +8,7 @@ namespace LuckyRunes
     {
         public override ConfigScope Mode => ConfigScope.ServerSide;
 
+        public const string HelpPrefix = "!runehelp";
 
         [Label("Event Prefix")]
         [Tooltip("The prefix for viewers to type before rolling a rune. The amount of coins spent should be typed after it with a space.")]
@@ -61,36 +62,6 @@ namespace LuckyRunes
         [DefaultValue(4000)]
         public int VeryHighBit { get; set; }
 
-        [Label("Very Low Impact Host Threshold")]
-        [Tooltip("Hosts that bring in an audience equal to or higher than this value will roll an event with an impact of 1.")]
-        [Range(1, int.MaxValue - 20)]
-        [DefaultValue(1)]
-        public int VeryLowHost { get; set; }
-
-        [Label("Low Impact Host Threshold")]
-        [Tooltip("Hosts that bring in an audience equal to or higher than this value will roll an event with an impact of 3.")]
-        [Range(1, int.MaxValue - 20)]
-        [DefaultValue(20)]
-        public int LowHost { get; set; }
-
-        [Label("Medium Impact Host Threshold")]
-        [Tooltip("Hosts that bring in an audience equal to or higher than this value will roll an event with an impact of 5.")]
-        [Range(1, int.MaxValue - 20)]
-        [DefaultValue(250)]
-        public int MediumHost { get; set; }
-
-        [Label("High Impact Host Threshold")]
-        [Tooltip("Hosts that bring in an audience equal to or higher than this value will roll an event with an impact of 7.")]
-        [Range(1, int.MaxValue - 20)]
-        [DefaultValue(800)]
-        public int HighHost { get; set; }
-
-        [Label("Very High Impact Host Threshold")]
-        [Tooltip("Hosts that bring in an audience equal to or higher than this value will roll an event with an impact of 9.")]
-        [Range(1, int.MaxValue - 20)]
-        [DefaultValue(2000)]
-        public int VeryHighHost { get; set; }
-
         [Label("No Destructive Events")]
         [Tooltip("If true, disables all events that destroy, replace or add tiles to the world.")]
         [DefaultValue(false)]
@@ -113,3 +84,33 @@ namespace LuckyRunes
         }
     }
 }
+
+//[Label("Very Low Impact Host Threshold")]
+//[Tooltip("Hosts that bring in an audience equal to or higher than this value will roll an event with an impact of 1.")]
+//[Range(1, int.MaxValue - 20)]
+//[DefaultValue(1)]
+//public int VeryLowHost { get; set; }
+
+//[Label("Low Impact Host Threshold")]
+//[Tooltip("Hosts that bring in an audience equal to or higher than this value will roll an event with an impact of 3.")]
+//[Range(1, int.MaxValue - 20)]
+//[DefaultValue(20)]
+//public int LowHost { get; set; }
+
+//[Label("Medium Impact Host Threshold")]
+//[Tooltip("Hosts that bring in an audience equal to or higher than this value will roll an event with an impact of 5.")]
+//[Range(1, int.MaxValue - 20)]
+//[DefaultValue(250)]
+//public int MediumHost { get; set; }
+
+//[Label("High Impact Host Threshold")]
+//[Tooltip("Hosts that bring in an audience equal to or higher than this value will roll an event with an impact of 7.")]
+//[Range(1, int.MaxValue - 20)]
+//[DefaultValue(800)]
+//public int HighHost { get; set; }
+
+//[Label("Very High Impact Host Threshold")]
+//[Tooltip("Hosts that bring in an audience equal to or higher than this value will roll an event with an impact of 9.")]
+//[Range(1, int.MaxValue - 20)]
+//[DefaultValue(2000)]
+//public int VeryHighHost { get; set; }
