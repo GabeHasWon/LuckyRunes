@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace LuckyRunes
 {
-    public class TwitchInput : TwitchHandler
+    class TwitchInput : TwitchHandler
     {
         /// <summary>Easy way to grab config.</summary>
         private static RuneConfig Config => ModContent.GetInstance<RuneConfig>();
@@ -18,6 +18,12 @@ namespace LuckyRunes
         public override void MessageHandler(Viewer viewer, string message, int bits)
         {
             Main.NewText("Message Checked");
+
+            RuneEvent ev = RuneManager.GetEvent(3f);
+            if (ev != null)
+                ev.Effects();
+
+            /*
             float impact = 0f;
             if (bits > 0)
                 impact = RuneManager.GetBitImpact(bits);
@@ -26,14 +32,14 @@ namespace LuckyRunes
             else if(message.StartsWith(Config.RuneCommandPrefix) && GetCoinsFromMessage(message) > 0 && viewer.Coins >= GetCoinsFromMessage(message))
             {
                 viewer.Coins -= GetCoinsFromMessage(message);
-                impact = RuneManager.GetBitImpact((int)(GetCoinsFromMessage(message) * Config.CoinRatio));
+                impact = 3f;//RuneManager.GetBitImpact((int)(GetCoinsFromMessage(message) * Config.CoinRatio));
             }
             if (impact > 0)
             {
                 RuneEvent ev = RuneManager.GetEvent(impact);
                 if (ev != null)
                     ev.Effects();
-            }
+            }*/
         }
 
         private double GetCoinsFromMessage(string message)

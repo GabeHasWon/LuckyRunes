@@ -8,12 +8,13 @@ using Terraria.ModLoader;
 
 namespace LuckyRunes
 {
-    public static class Calls
-    {
+	public static class Calls
+	{
 		static public Mod ProjectT => LuckyRunes.ProjectT;
 
+
 		//how to send a message in Chat:
-		static public void Sendmessage(string message)
+		static public void sendmessage(string message)
 		{
 			if (ProjectT != null)
 			{
@@ -23,7 +24,7 @@ namespace LuckyRunes
 		}
 
 		//send a whisper to a specific person
-		static public void Sendwhisper(string name, string message)
+		static public void sendwhisper(string name, string message)
 		{
 			if (ProjectT != null)
 			{
@@ -36,7 +37,8 @@ namespace LuckyRunes
 		}
 
 		//The "Viewers" I require for adding and removing coins don't have to be 100% accurate. Only the Username and UserID are required. the rest can just be null.
-		static public bool Removecoins(Viewer viewer, double CoinsToRemove)
+
+		static public bool removecoins(Viewer viewer, double CoinsToRemove)
 		{
 			if (ProjectT != null)
 			{
@@ -60,7 +62,7 @@ namespace LuckyRunes
 			return false;
 		}
 
-		static public void Addcoins(Viewer viewer, double CoinsToAdd)
+		static public void addcoins(Viewer viewer, double CoinsToAdd)
 		{
 			if (ProjectT != null)
 			{
@@ -69,6 +71,8 @@ namespace LuckyRunes
 
 				//requires the operator "AddCoins", a receiver and amount
 				ProjectT.Call("AddCoins", viewer, req);
+
+				//I check on my side if the user exists. you don't have to. But you won't get a return here.
 			}
 		}
 	}
