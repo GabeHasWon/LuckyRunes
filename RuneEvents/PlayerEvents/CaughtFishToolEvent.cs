@@ -10,6 +10,7 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
         public override string Name => "I Caught a Fish?";
         public override string Message => "Catch a fish tool or wooden/iron crate";
         public override float Impact => 2.5f;
+        public override float Alignment => 0.1f;
 
         public override void PlayerEffect(Player player)
         {

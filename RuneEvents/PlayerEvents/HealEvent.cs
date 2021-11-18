@@ -10,6 +10,7 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
         public override string Name => "Heal";
         public override string Message => "You get healed!";
         public override float Impact => 1f;
+        public override float Alignment => 0.1f;
 
         public override void PlayerEffect(Player player)
         { 

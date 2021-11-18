@@ -8,10 +8,8 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
         public override string Name => "On Fire!";
         public override string Message => "You're on fire!";
         public override float Impact => 1f;
+        public override float Alignment => -0.1f;
 
-        public override void PlayerEffect(Player player)
-        {
-            player.AddBuff(BuffID.OnFire, 200);
-        }
+        public override void PlayerEffect(Player player) => player.AddBuff(BuffID.OnFire, 200);
     }
 }

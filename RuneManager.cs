@@ -76,7 +76,7 @@ namespace LuckyRunes
                     if (ev is PlayerEvent) //If player event
                     {
                         var pEvent = ev as PlayerEvent;
-                        if (!pEvent.ChooseAllPlayers && pEvent.GetPlayer() != null) //If the player-specific event has a valid player
+                        if (!pEvent.SelectRandomPlayer && pEvent.GetPlayer() != null) //If the player-specific event has a valid player
                             return ev;
                         return ev;
                     }

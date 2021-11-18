@@ -3,6 +3,7 @@ using Terraria.ModLoader.Config;
 
 namespace LuckyRunes
 {
+    [Label("Client Config")]
     public class RuneConfig : ModConfig
     {
         public override ConfigScope Mode => ConfigScope.ServerSide;

@@ -1,4 +1,6 @@
-﻿using ProjectT;
+﻿using LuckyRunes.RuneEvents;
+using Microsoft.Xna.Framework;
+using ProjectT;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -34,8 +36,24 @@ namespace LuckyRunes
 
             if (impact > 0)
             {
-                RuneManager.GetEvent(impact)?.Effects();
+                RuneEvent ev = RuneManager.GetEvent(impact);
+                Main.NewText($"{viewer.Name} bought: [c/{GetImpactColor(ev.Impact).Hex3()}:{ev.Name}]");
+                Main.NewText($"They say: {GetMessage(message)}");
+                ev?.Effects();
             }
+        }
+
+        private Color GetImpactColor(float impact)
+        {
+            if (impact <= 1f) //Very low impact
+                return Color.White;
+            else if (impact <= 3f) //Low impact
+                return Color.Green;
+            else if (impact <= 5f) //Medium impact
+                return Color.Blue;
+            else if (impact <= 7f) //High impact
+                return Color.Purple;
+            return Color.Gold; //Very high impact
         }
 
         private double GetCoinsFromMessage(string message)
@@ -47,13 +65,13 @@ namespace LuckyRunes
             return 0;
         }
 
-        private double GetSecondArgument(string message)
+        private string GetMessage(string message)
         {
             string[] messageParams = message.Split(' ');
 
             if (messageParams.Length > 2)
                 return messageParams[2];
-            return 0;
+            return "";
         }
 
         private float GetImpactFromModMessage(string message)
@@ -74,14 +92,9 @@ namespace LuckyRunes
         {
             //BEWARE. this only gets the name of the hoster. NOT AN INSTANCE OF A VIEWER. 
             //A Viewer will be created once the hoster writes in chat like everyone else.
-
-            //name says it all
         }
 
-        public override void onConnected()
-        {
-            Main.NewText("Bot connected.");
-        }
+        public override void onConnected() => Main.NewText("Bot connected. Hi all!");
 
         public override void onConnectionError() => Main.NewText("Bot failed to connect. (Error)");
 
