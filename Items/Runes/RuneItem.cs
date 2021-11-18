@@ -36,7 +36,7 @@ namespace LuckyRunes.Items.Runes
             var ev = RuneManager.GetEvent(Impact);
             if (ev != null)
                 ev.Effects();
-            return true;
+            return ev != null;
         }
     }
 }
