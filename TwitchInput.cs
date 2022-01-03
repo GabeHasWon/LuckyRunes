@@ -25,13 +25,8 @@ namespace LuckyRunes
 
             if (message.StartsWith(RuneConfig.HelpPrefix))
             {
-                string[] messageParams = message.Split(' ');
-
-                if (messageParams.Length > 0)
-                {
-                    HelpMessage(messageParams[1].ToUpper());
-                    return;
-                }
+                HelpMessage(message);
+                return;
             }
 
             if (message.StartsWith(Config.SpecificEventPrefix) && SpecificRuneEvent(viewer, message))
@@ -60,33 +55,35 @@ namespace LuckyRunes
             }
         }
 
-        private void HelpMessage(string section)
+        private void HelpMessage(string message)
         {
+            string[] section = message.Split(' ');
             string[] randomEventQualifiers = new string[] { "ROLL", "RANDOM", "RANDOMEVENT", "ROLLEVENT" };
             string[] specificEventQualifiers = new string[] { "SPECIFIC", "CHOOSE", "SPECIFICEVENT" };
             string[] coinQualifiers = new string[] { "COIN", "COINS" };
             string[] bitQualifiers = new string[] { "BITS", "BIT" };
-            
-            if (section == string.Empty)
+
+
+            if (section.Length == 1)
             {
                 string sections = "ROLL, SPECIFIC, COIN, BITS";
 
                 Calls.SendMessage($"This is the help section for Lucky Runes. Use {RuneConfig.HelpPrefix} {{section}} in order to look through a specific section.\n" +
                     $"Sections: {sections}");
             }
-            else if (randomEventQualifiers.Any(x => x == section))
+            else if (randomEventQualifiers.Any(x => x == section[1].ToUpper()))
                 Calls.SendMessage($"{Config.RuneCommandPrefix} rolls an event. Usage:\n{Config.RuneCommandPrefix} {{coin amount}} optional:{{message}}\n");
-            else if (specificEventQualifiers.Any(x => x == section))
+            else if (specificEventQualifiers.Any(x => x == section[1].ToUpper()))
             {
                 Calls.SendMessage($"\n\n{Config.SpecificEventPrefix} rolls a specific event. Usage:\n{Config.SpecificEventPrefix} {{name of event}} {{message}}\n" +
                     $"Buying a specific event will cost you three times more than rolling a random event of the same tier." +
                     $"Only use this when you're sure you want to have a specific impact on the game.");
             }
-            else if (coinQualifiers.Any(x => x == section))
+            else if (coinQualifiers.Any(x => x == section[1].ToUpper()))
             {
                 Calls.SendMessage($"Coins are a currency you use to buy events. How you get coins is configured by the streamer!");
             }
-            else if (bitQualifiers.Any(x => x == section))
+            else if (bitQualifiers.Any(x => x == section[1].ToUpper()))
             {
                 Calls.SendMessage($"Donating bits allows you to roll an event that occurs immediately in-game.\nThe thresholds are:\n" +
                     $"{Config.VeryLowBit} bits for very low impact events\n{Config.LowBit} bits for low impact events\n{Config.MediumBit} bits for medium impact events\n" +
@@ -116,6 +113,8 @@ namespace LuckyRunes
 
                     if (note != string.Empty)
                         Main.NewText($"They say: {note}");
+
+                    ev?.Effects();
                     return true;
                 }
             }
@@ -124,13 +123,13 @@ namespace LuckyRunes
 
         private Color GetImpactColor(float impact)
         {
-            if (impact <= 1f) //Very low impact
+            if (impact < 2f) //Very low impact
                 return Color.White;
-            else if (impact <= 3f) //Low impact
+            else if (impact < 4f) //Low impact
                 return Color.Green;
-            else if (impact <= 5f) //Medium impact
+            else if (impact < 6f) //Medium impact
                 return Color.Blue;
-            else if (impact <= 7f) //High impact
+            else if (impact < 8f) //High impact
                 return Color.Purple;
             return Color.Gold; //Very high impact
         }

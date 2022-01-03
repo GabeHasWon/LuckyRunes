@@ -8,7 +8,7 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
     {
         public override string Name => "Random Teleport";
         public override string Message => "Teleports the player to a random location, as if they drank a teleportation potion";
-        public override float Impact => 2f;
+        public override float Impact => 2.1f;
         public override float Chaos => 0.1f;
 
         public override void PlayerEffect(Player player)

@@ -1,25 +1,31 @@
 using Terraria.ModLoader;
+using ProjectT;
 
 namespace LuckyRunes
 {
     public class LuckyRunes : Mod
     {
         TwitchInput input = null;
-        public static Mod ProjectT;
+        public static Mod ProjectTMod;
+
+        public LuckyRunes()
+        {
+            ;
+        }
 
         public override void Load()
         {
-            ProjectT = ModLoader.GetMod("ProjectT");
-
-            if (ProjectT != null)
+            ProjectTMod = ModLoader.GetMod("ProjectT");
+            if (ProjectTMod != null)
                 input = new TwitchInput();
 
+            RuneControl.InitializeVars();
             RuneManager.Load();
         }
 
         public override void Unload()
         {
-            ProjectT = null;
+            ProjectTMod = null;
             RuneManager.Unload();
         }
     }

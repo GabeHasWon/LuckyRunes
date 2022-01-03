@@ -1,5 +1,4 @@
 ﻿using LuckyRunes.RuneEvents;
-using ProjectT;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,7 +53,7 @@ namespace LuckyRunes
         /// <param name="name">Name to look for.</param>
         public static RuneEvent GetEvent(string name)
         {
-            RuneEvent ev = events.FirstOrDefault(x => x.Name.ToUpper() == name.ToUpper());
+            RuneEvent ev = events.FirstOrDefault(x => x.Name.ToUpper().Replace(" ", "") == name.ToUpper());
             return ev; //Select the first event that matches the name
         }
 
@@ -124,6 +123,6 @@ namespace LuckyRunes
         /// <summary>Returns the list given the impact and variance restrictions.</summary>
         /// <param name="list">List to restrict.</param>
         /// <param name="impact">Base impact to restrict from.</param>
-        private static IEnumerable<RuneEvent> RestrictToImpact(IEnumerable<RuneEvent> list, float impact) => list.Where(x => x.Impact - Config.Variance <= impact && x.Impact + Config.Variance >= impact);
+        private static IEnumerable<RuneEvent> RestrictToImpact(IEnumerable<RuneEvent> list, float impact) => list.Where(x => x.Impact - Config.Variance < impact && x.Impact + Config.Variance >= impact);
     }
 }

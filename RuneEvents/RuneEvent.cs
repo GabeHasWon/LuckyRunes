@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using ProjectT;
 using Terraria;
 
 namespace LuckyRunes.RuneEvents

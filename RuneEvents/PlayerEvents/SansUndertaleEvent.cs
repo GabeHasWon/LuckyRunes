@@ -8,7 +8,7 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
     {
         public override string Name => "Sans Undertale";
         public override string Message => "Sans Undertale";
-        public override float Impact => 5f;
+        public override float Impact => 5.1f;
 
         public override void PlayerEffect(Player player)
         {

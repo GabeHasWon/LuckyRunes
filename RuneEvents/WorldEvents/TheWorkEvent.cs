@@ -8,7 +8,7 @@ namespace LuckyRunes.RuneEvents.WorldEvents
     {
         public override string Name => "The Work";
         public override string Message => "Complete the Work";
-        public override float Impact => 10f;
+        public override float Impact => 9.99f;
         public override bool Destructive => true;
         public override float Chaos => 0.9f;
         public override float Alignment => -0.5f;

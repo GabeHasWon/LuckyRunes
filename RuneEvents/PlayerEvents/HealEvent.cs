@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using ProjectT;
 using Terraria;
 
 namespace LuckyRunes.RuneEvents.PlayerEvents
@@ -9,13 +8,13 @@ namespace LuckyRunes.RuneEvents.PlayerEvents
     {
         public override string Name => "Heal";
         public override string Message => "You get healed!";
-        public override float Impact => 1f;
-        public override float Alignment => 0.1f;
+        public override float Impact => 1.9f;
+        public override float Alignment => 0.25f;
 
         public override void PlayerEffect(Player player)
         { 
-            player.HealEffect(20);
-            player.statLife += 20;
+            player.HealEffect(100);
+            player.statLife += 100;
             if (player.statLife > player.statLifeMax2)
                 player.statLife = player.statLifeMax2;
         }
