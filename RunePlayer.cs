@@ -19,6 +19,9 @@ namespace LuckyRunes
             base.ResetEffects();
         }
 
+        public static RunePlayer Get() => Get(Main.LocalPlayer);
+        public static RunePlayer Get(Player player) => player.GetModPlayer<RunePlayer>();
+
         public override void PreUpdate()
         {
             #region Rains
@@ -46,8 +49,38 @@ namespace LuckyRunes
                 if (GoldRain % 16 == 0)
                     Rain(ItemID.GoldCoin);
             }
+            if(RainbowFart > 0)
+            {
+                RainbowFart--;
+                if (RainbowFart % 6 == 0)
+                    Dust.NewDust(player.Center, 0, 22, 267, 0, 0, 0, new Color(250, 100, 100), 2); //RainbowRod
+                if (RainbowFart % 6 == 1)
+                    Dust.NewDust(player.Center, 0, 22, 267, 0, 0, 0, new Color(100, 250, 100), 2); //RainbowRod
+                if (RainbowFart % 6 == 2)
+                    Dust.NewDust(player.Center, 0, 22, 267, 0, 0, 0, new Color(100, 100, 250), 2); //RainbowRod
+                if (RainbowFart % 6 == 3)
+                    Dust.NewDust(player.Center, 0, 22, 267, 0, 0, 0, new Color(250, 250, 100), 2); //RainbowRod
+                if (RainbowFart % 6 == 4)
+                    Dust.NewDust(player.Center, 0, 22, 267, 0, 0, 0, new Color(100, 250, 250), 2); //RainbowRod
+                if (RainbowFart % 6 == 5)
+                    Dust.NewDust(player.Center, 0, 22, 267, 0, 0, 0, new Color(250, 100, 250), 2); //RainbowRod
+                /*{
+                    Vector2 midPoint = new Vector2((float)player.width, (float)player.height) / 2f;
+                    if (player.oldPosition != Vector2.Zero)
+                    {
+                        int num319 = Dust.NewDust(player.oldPosition + midPoint, 0, 0, 66, 0f, 0f, 150, Color.Transparent, 0.7f);
+                        Main.dust[num319].color = Main.hslToRgb(Main.rand.NextFloat(), 1f, 0.5f);
+                        Main.dust[num319].noGravity = true;
+                    }
+                }*/
+                player.velocity.Y -= .5f;
+            }
             #endregion
             base.PreUpdate();
+        }
+        public override void UpdateBiomes()
+        {
+            ArcaneMeteor = (RuneWorld.ArcaneTiles > 30);
         }
 
         private void Rain(int item)
@@ -60,5 +93,7 @@ namespace LuckyRunes
         public int CopperRain { get; set; }
         public int SilverRain { get; set; }
         public int GoldRain { get; set; }
+        public int RainbowFart { get; set; }
+        public bool ArcaneMeteor { get; set; }
     }
 }

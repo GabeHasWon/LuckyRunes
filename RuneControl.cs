@@ -711,6 +711,46 @@ namespace LuckyRunes
         }
         #endregion
 
+        #region Enemies
+
+        public static int GetRandomEnemyFromProgression(Progression progression)
+        {
+            switch(progression)
+            {
+                case Progression.EarlyPreHM:
+                    return EarlyPreHMEnemies[Main.rand.Next(EarlyPreHMEnemies.Count)];
+                case Progression.MidPreHM:
+                    return MidPreHMEnemies[Main.rand.Next(MidPreHMEnemies.Count)];
+                case Progression.LatePreHM:
+                    return LatePreHMEnemies[Main.rand.Next(LatePreHMEnemies.Count)];
+                case Progression.EarlyHM:
+                    return EarlyHMEnemies[Main.rand.Next(EarlyHMEnemies.Count)];
+                case Progression.PostMech:
+                    return PostMechEnemies[Main.rand.Next(PostMechEnemies.Count)];
+                case Progression.MidHM:
+                    return MidHMEnemies[Main.rand.Next(MidHMEnemies.Count)];
+                case Progression.LateHM:
+                    return LateHMEnemies[Main.rand.Next(LateHMEnemies.Count)];
+                case Progression.PostML:
+                    return LateHMEnemies[Main.rand.Next(LateHMEnemies.Count)];
+                default:
+                    if (Main.dayTime)
+                        return PreBossDayEnemies[Main.rand.Next(PreBossDayEnemies.Count)];
+                    return PreBossNightEnemies[Main.rand.Next(PreBossNightEnemies.Count)];
+            }
+        }
+
+        private static List<int> PreBossDayEnemies = new List<int> { NPCID.BlueSlime, NPCID.GreenSlime, NPCID.Vulture };
+        private static List<int> PreBossNightEnemies = new List<int> { NPCID.Zombie, NPCID.DemonEye, NPCID.Antlion };
+        private static List<int> EarlyPreHMEnemies = new List<int> { NPCID.Harpy, NPCID.MotherSlime, NPCID.FlyingAntlion, NPCID.Skeleton, NPCID.CaveBat, NPCID.WallCreeper, NPCID.IceBat, NPCID.Crab };
+        private static List<int> MidPreHMEnemies = new List<int> { NPCID.Tim, NPCID.Pinky, NPCID.Hornet, NPCID.MeteorHead, NPCID.JungleBat, NPCID.WallCreeper, NPCID.Ghost, NPCID.Shark, NPCID.GraniteFlyer };
+        private static List<int> LatePreHMEnemies = new List<int> { NPCID.Demon, NPCID.BoneSerpentHead, NPCID.FireImp, NPCID.CursedSkull, NPCID.DarkCaster, NPCID.Hellbat, NPCID.DungeonSlime };
+        private static List<int> EarlyHMEnemies = new List<int> { NPCID.GiantBat, NPCID.IceElemental, NPCID.Lavabat, NPCID.MossHornet, NPCID.RuneWizard, NPCID.SkeletonArcher, NPCID.Mummy, NPCID.BlackRecluse };
+        private static List<int> PostMechEnemies = new List<int> { NPCID.GiantTortoise, NPCID.Unicorn, NPCID.Wraith, NPCID.RedDevil, NPCID.ChaosElemental, NPCID.Derpling, NPCID.AngryTrapper, NPCID.JungleCreeper };
+        private static List<int> MidHMEnemies = new List<int> { NPCID.Paladin, NPCID.GiantCursedSkull, NPCID.FlyingSnake, NPCID.Lihzahrd, NPCID.SkeletonSniper, NPCID.BoneLee, NPCID.Necromancer, NPCID.RaggedCaster };
+        private static List<int> LateHMEnemies = new List<int> { NPCID.VortexHornetQueen, NPCID.SolarCorite, NPCID.NebulaBrain, NPCID.StardustCellBig, NPCID.NebulaSoldier, NPCID.SolarCrawltipedeHead, NPCID.StardustJellyfishBig, NPCID.VortexRifleman };
+        #endregion
+
         public static bool TileCheckSafe(int x, int y)
         {
             return x >= 0 && x < Main.maxTilesX && y >= 0 && y < Main.maxTilesY;

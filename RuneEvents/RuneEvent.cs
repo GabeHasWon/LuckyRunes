@@ -23,8 +23,11 @@ namespace LuckyRunes.RuneEvents
         /// <summary>Determines how good/bad an event is. -1 is very bad, 0 is neutral, 1 is very good. Defaults to 0.</summary>
         public virtual float Alignment => 0f;
 
-        /// <summary>How chaotic an event is. 0 is </summary>
+        /// <summary>How chaotic an event is. 0 is predictable. Defaults to 0.</summary>
         public virtual float Chaos => 0f;
+
+        /// <summary>How likely an event is. 1 is Default. Between 0 and 1 is less likely, more than 1 is more likely.</summary>
+        public virtual float Weight { get; set; } = 1f;
 
         /// <summary>The actual effects of this event. Prints a message to chat by default.</summary>
         public virtual void Effects()

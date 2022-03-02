@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace LuckyRunes
 {
@@ -42,11 +43,14 @@ namespace LuckyRunes
         /// <param name="bits">The bits in the message, if any.</param>
         public static RuneEvent GetEvent(float impact, List<RuneEvent> restrictedEvents = null)
         {
-            Random rand = new Random();
             var list = RestrictToImpact(restrictedEvents ?? events, impact); //Update list to include events with valid impact
-            list = ReturnValidEvents(list);
-            var newList = list.ToList();
-            return newList[rand.Next(newList.Count())]; //Update list to remove events that don't meet the conditions, then pick a random one
+            list = ReturnValidEvents(list); //Update list to remove events that don't meet the conditions
+
+            WeightedRandom<RuneEvent> wrand = new WeightedRandom<RuneEvent>();
+            foreach (var item in list)
+                wrand.Add(item, item.Weight);
+
+            return wrand.Get();
         }
 
         /// <summary>Gets the first event that has the given name.</summary>
