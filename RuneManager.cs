@@ -28,7 +28,7 @@ namespace LuckyRunes
             foreach (var type in types)
             {
                 if (type.IsSubclassOf(typeof(RuneEvent)) && !type.IsAbstract)
-                    events.Add(Activator.CreateInstance(type) as RuneEvent);
+                    AddEvent(Activator.CreateInstance(type) as RuneEvent);
             }
         }
 
@@ -57,8 +57,13 @@ namespace LuckyRunes
         /// <param name="name">Name to look for.</param>
         public static RuneEvent GetEvent(string name)
         {
-            RuneEvent ev = events.FirstOrDefault(x => x.Name.ToUpper().Replace(" ", "") == name.ToUpper());
+            RuneEvent ev = events.FirstOrDefault(x => x.Name.Replace(" ", "").Equals(name, StringComparison.OrdinalIgnoreCase));
             return ev; //Select the first event that matches the name
+        }
+
+        public static RuneEvent GetDirectEvent(string name)
+        {
+            return events.FirstOrDefault(e => e.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
         private static IEnumerable<RuneEvent> ReturnValidEvents(IEnumerable<RuneEvent> list)
