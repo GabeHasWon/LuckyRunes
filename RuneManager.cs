@@ -28,7 +28,7 @@ namespace LuckyRunes
             foreach (var type in types)
             {
                 if (type.IsSubclassOf(typeof(RuneEvent)) && !type.IsAbstract)
-                    events.Add(Activator.CreateInstance(type) as RuneEvent);
+                    AddEvent(Activator.CreateInstance(type) as RuneEvent);
             }
         }
 
