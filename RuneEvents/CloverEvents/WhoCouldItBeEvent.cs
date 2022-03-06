@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace LuckyRunes.RuneEvents.CloverEvents
 {
-    public class WhoCouldItBe : PlayerEvent
+    public class WhoCouldItBeEvent : PlayerEvent
     {
         public override string Name => "Who Could It Be?";
         public override string Message => "Spawns a group of entirely random NPCs";
